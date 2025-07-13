@@ -1,28 +1,35 @@
-// Obtener todos los elementos con clase "ramo"
-const ramos = document.querySelectorAll('.ramo');
+document.addEventListener("DOMContentLoaded", () => {
+    const ramos = document.querySelectorAll('.ramo');
 
-// Función para manejar el clic en un ramo
-ramos.forEach(ramo => {
-    ramo.addEventListener('click', function() {
-        if (ramo.classList.contains('aprobado')) {
-            return; // Si el ramo ya está aprobado, no hacer nada
+    // Inicializar: bloquear todos los ramos con requisitos
+    ramos.forEach(ramo => {
+        const requisito = ramo.getAttribute('data-requiere');
+        if (requisito && requisito !== "none" && requisito !== "ninguno") {
+            ramo.classList.add('disabled');
         }
-        
-        // Marcar el ramo como aprobado
-        ramo.classList.add('aprobado');
-        
-        // Obtener los ramos que dependen de este ramo
-        desbloquearRamos(ramo.id);
+    });
+
+    ramos.forEach(ramo => {
+        ramo.addEventListener('click', () => {
+            // Evitar clic en ramos bloqueados
+            if (ramo.classList.contains('disabled') || ramo.classList.contains('aprobado')) {
+                return;
+            }
+
+            // Marcar como aprobado
+            ramo.classList.add('aprobado');
+            ramo.classList.remove('desbloqueado');
+
+            const aprobadoId = ramo.id;
+
+            // Desbloquear los ramos que dependen de este
+            ramos.forEach(dep => {
+                const requisito = dep.getAttribute('data-requiere');
+                if (requisito === aprobadoId) {
+                    dep.classList.remove('disabled');
+                    dep.classList.add('desbloqueado');
+                }
+            });
+        });
     });
 });
-
-// Función para desbloquear los ramos que dependen de otro
-function desbloquearRamos(ramoId) {
-    const ramosDependientes = document.querySelectorAll(`[data-requiere="${ramoId}"]`);
-    
-    ramosDependientes.forEach(ramo => {
-        // Desbloquear el ramo
-        ramo.classList.remove('disabled');
-        ramo.classList.add('desbloqueado');
-    });
-}
