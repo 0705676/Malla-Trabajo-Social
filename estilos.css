@@ -46,7 +46,7 @@ section {
 }
 
 .ramo {
-  background-color: #e0e0e0; /* Gris claro - no visto */
+  background-color: #ffffff; /* Blanco por defecto (desbloqueada) */
   color: #333;
   padding: 20px;
   border-radius: 8px;
@@ -60,16 +60,18 @@ section {
 }
 
 .ramo:hover {
-  background-color: #d5d5d5; /* Gris un poco más oscuro al pasar el mouse */
+  background-color: #f0f0f0;
 }
 
 .ramo.aprobado {
-  background-color: #c62828; /* Rojo */
+  background-color: #c62828; /* Rojo fuerte */
   color: white;
   cursor: default;
 }
 
 .ramo.disabled {
-  opacity: 0.4;
+  background-color: #cccccc; /* Gris claro para no vistas */
+  color: #888;
   pointer-events: none;
+  opacity: 0.6;
 }
