@@ -1,80 +1,28 @@
-body {
-  font-family: 'Segoe UI', sans-serif;
-  margin: 0;
-  padding: 20px;
-  background: #f9f9f9;
-}
+// Obtener todos los elementos con clase "ramo"
+const ramos = document.querySelectorAll('.ramo');
 
-h1 {
-  text-align: center;
-  margin-bottom: 30px;
-}
+// Función para manejar el clic en un ramo
+ramos.forEach(ramo => {
+    ramo.addEventListener('click', function() {
+        if (ramo.classList.contains('aprobado')) {
+            return; // Si el ramo ya está aprobado, no hacer nada
+        }
+        
+        // Marcar el ramo como aprobado
+        ramo.classList.add('aprobado');
+        
+        // Obtener los ramos que dependen de este ramo
+        desbloquearRamos(ramo.id);
+    });
+});
 
-.semestre {
-  margin-bottom: 40px;
-}
-
-.semestre h2 {
-  margin-bottom: 10px;
-  background: #3f51b5;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.materias {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-}
-
-.materia {
-  border-radius: 8px;
-  background: white;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 2px solid #ccc;
-  transition: transform 0.2s;
-}
-
-.materia:hover {
-  transform: scale(1.01);
-}
-
-.aprobada {
-  background: #ffdddd;
-  border-color: red;
-}
-
-.bloqueada {
-  background: #e0e0e0;
-  color: #777;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-input[type="checkbox"] {
-  transform: scale(1.2);
-}
-
-.acciones {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-button {
-  background: #e53935;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #c62828;
+// Función para desbloquear los ramos que dependen de otro
+function desbloquearRamos(ramoId) {
+    const ramosDependientes = document.querySelectorAll(`[data-requiere="${ramoId}"]`);
+    
+    ramosDependientes.forEach(ramo => {
+        // Desbloquear el ramo
+        ramo.classList.remove('disabled');
+        ramo.classList.add('desbloqueado');
+    });
 }
