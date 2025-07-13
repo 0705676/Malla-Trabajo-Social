@@ -7,107 +7,130 @@
   <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
-  <header><h1>Malla Interactiva - Trabajo Social</h1></header>
+
+  <header>
+    <h1>Malla Interactiva - Trabajo Social</h1>
+    <button onclick="reiniciarMalla()">🔁 Reiniciar malla</button>
+  </header>
+
   <main>
+
     <!-- Primer Año -->
     <section>
       <h2>Primer Año</h2>
+
+      <h3>I Semestre</h3>
       <div class="semestre">
-        <h3>I Semestre</h3>
-        <div class="ramo" id="matematicas" data-requiere="none">Matemáticas</div>
-        <div class="ramo" id="bases-sociologicas" data-requiere="none">Bases Sociológicas</div>
-        <div class="ramo" id="fundamentos-trabajo-social" data-requiere="none">Fundamentos del TS</div>
-        <div class="ramo" id="expresion-oral" data-requiere="none">Expresión Oral y Escrita</div>
-        <div class="ramo" id="autodesarrollo" data-requiere="none">Autodesarrollo</div>
+        <div class="ramo" id="matematicas" data-requiere="ninguno">Matemáticas</div>
+        <div class="ramo" id="bases_sociologicas" data-requiere="ninguno">Bases Sociológicas</div>
+        <div class="ramo" id="fundamentos_ts" data-requiere="ninguno">Fundamentos de TS</div>
+        <div class="ramo" id="expresion" data-requiere="ninguno">Expresión Oral y Escrita</div>
+        <div class="ramo" id="autodesarrollo" data-requiere="ninguno">Autodesarrollo</div>
       </div>
+
+      <h3>II Semestre</h3>
       <div class="semestre">
-        <h3>II Semestre</h3>
-        <div class="ramo" id="estadistica-I" data-requiere="matematicas">Estadística I</div>
-        <div class="ramo" id="epistemologia" data-requiere="bases-sociologicas">Epistemología</div>
-        <div class="ramo" id="trabajo-social" data-requiere="fundamentos-trabajo-social">TS como disciplina</div>
-        <div class="ramo" id="antropologia" data-requiere="bases-sociologicas">Antropología Social</div>
-        <div class="ramo" id="psicologia-general" data-requiere="none">Psicología General</div>
-        <div class="ramo" id="informatica" data-requiere="none">Informática Básica</div>
+        <div class="ramo" id="estadistica1" data-requiere="matematicas">Estadística I</div>
+        <div class="ramo" id="epistemologia" data-requiere="ninguno">Epistemología</div>
+        <div class="ramo" id="ts_disciplina" data-requiere="fundamentos_ts">TS como Disciplina y Profesión</div>
+        <div class="ramo" id="antropologia" data-requiere="bases_sociologicas">Antropología Social</div>
+        <div class="ramo" id="psicologia_general" data-requiere="ninguno">Psicología General</div>
+        <div class="ramo" id="informatica" data-requiere="ninguno">Informática Básica</div>
       </div>
     </section>
 
     <!-- Segundo Año -->
     <section>
       <h2>Segundo Año</h2>
+
+      <h3>III Semestre</h3>
       <div class="semestre">
-        <h3>III Semestre</h3>
-        <div class="ramo" id="estadistica-II" data-requiere="estadistica-I">Estadística II</div>
-        <div class="ramo" id="investigacion-social-I" data-requiere="epistemologia">Investigación Social I</div>
-        <div class="ramo" id="metodos-intervencion" data-requiere="trabajo-social">Métodos de Intervención</div>
-        <div class="ramo" id="ecologia-humana" data-requiere="none">Ecología Humana</div>
-        <div class="ramo" id="psicologia-social" data-requiere="psicologia-general">Psicología Social</div>
-        <div class="ramo" id="teoria-socio-politica" data-requiere="none">Teoría Socio-Política</div>
+        <div class="ramo" id="estadistica2" data-requiere="estadistica1">Estadística II</div>
+        <div class="ramo" id="investigacion1" data-requiere="epistemologia">Investigación Social I</div>
+        <div class="ramo" id="metodos" data-requiere="ts_disciplina">Métodos de Intervención</div>
+        <div class="ramo" id="ecologia" data-requiere="ninguno">Ecología Humana</div>
+        <div class="ramo" id="psicologia_social" data-requiere="psicologia_general">Psicología Social</div>
+        <div class="ramo" id="teoria" data-requiere="ninguno">Teoría Socio-política</div>
       </div>
+
+      <h3>IV Semestre</h3>
       <div class="semestre">
-        <h3>IV Semestre</h3>
-        <div class="ramo" id="comunicacion" data-requiere="none">Comunicación</div>
-        <div class="ramo" id="estudios-poblacion" data-requiere="estadistica-I">Estudios de Población</div>
-        <div class="ramo" id="ts-grupo" data-requiere="metodos-intervencion">TS con Grupo</div>
-        <div class="ramo" id="tecnicas-grupales" data-requiere="none">Técnicas Grupales</div>
-        <div class="ramo" id="economia-politica" data-requiere="none">Economía Política</div>
-        <div class="ramo" id="historia-vzla" data-requiere="none">Historia Contemp. de Venezuela</div>
+        <div class="ramo" id="comunicacion" data-requiere="ninguno">Comunicación</div>
+        <div class="ramo" id="estudios_poblacion" data-requiere="estadistica1">Estudios de Población</div>
+        <div class="ramo" id="ts_grupo" data-requiere="metodos">TS con Grupo</div>
+        <div class="ramo" id="tecnicas_grupales" data-requiere="ninguno">Técnicas Grupales</div>
+        <div class="ramo" id="economia" data-requiere="ninguno">Economía Política</div>
+        <div class="ramo" id="historia" data-requiere="ninguno">Historia Contemporánea</div>
       </div>
     </section>
 
     <!-- Tercer Año -->
     <section>
       <h2>Tercer Año</h2>
+
+      <h3>V Semestre</h3>
       <div class="semestre">
-        <h3>V Semestre</h3>
-        <div class="ramo" id="investigacion-social-II" data-requiere="estadistica-II,investigacion-social-I">Investigación Social II</div>
-        <div class="ramo" id="legislacion-social" data-requiere="none">Legislación Social</div>
-        <div class="ramo" id="ts-comunidad" data-requiere="ts-grupo">TS en Comunidad</div>
-        <div class="ramo" id="planificacion-social" data-requiere="metodos-intervencion">Planificación Social</div>
-        <div class="ramo" id="estado-politica-social" data-requiere="economia-politica">Estado y Política Social</div>
-        <div class="ramo" id="ingles" data-requiere="none">Inglés</div>
+        <div class="ramo" id="investigacion2" data-requiere="estadistica2, investigacion1">Investigación Social II</div>
+        <div class="ramo" id="legislacion" data-requiere="ninguno">Legislación Social</div>
+        <div class="ramo" id="ts_comunidad" data-requiere="ts_grupo">TS en el Ámbito Comunitario</div>
+        <div class="ramo" id="planificacion" data-requiere="metodos">Planificación Social</div>
+        <div class="ramo" id="estado" data-requiere="economia">Estado y Política Social</div>
+        <div class="ramo" id="ingles" data-requiere="ninguno">Inglés</div>
       </div>
+
+      <h3>VI Semestre</h3>
       <div class="semestre">
-        <h3>VI Semestre</h3>
-        <div class="ramo" id="investigacion-social-III" data-requiere="investigacion-social-II">Investigación Social III</div>
-        <div class="ramo" id="administracion-social" data-requiere="estado-politica-social">Administración y Gerencia Social</div>
-        <div class="ramo" id="ts-familia" data-requiere="none">TS con Individuo y Familia</div>
-        <div class="ramo" id="formulacion-proyectos" data-requiere="planificacion-social">Formulación y Evaluación de Proyectos</div>
-        <div class="ramo" id="indicadores-sociales" data-requiere="estudios-poblacion">Indicadores Sociales</div>
-        <div class="ramo" id="electiva-I" data-requiere="none">Electiva I</div>
+        <div class="ramo" id="investigacion3" data-requiere="investigacion2">Investigación Social III</div>
+        <div class="ramo" id="admin" data-requiere="estado">Administración y Gerencia Social</div>
+        <div class="ramo" id="individuo_familia" data-requiere="ninguno">TS con Individuo y Familia</div>
+        <div class="ramo" id="formulacion" data-requiere="planificacion">Formulación y Evaluación de Proyectos</div>
+        <div class="ramo" id="indicadores" data-requiere="planificacion, estudios_poblacion">Indicadores Sociales</div>
+        <div class="ramo" id="electiva1" data-requiere="ninguno">Electiva I</div>
       </div>
     </section>
 
     <!-- Cuarto Año -->
     <section>
       <h2>Cuarto Año</h2>
+
+      <h3>VII Semestre</h3>
       <div class="semestre">
-        <h3>VII Semestre</h3>
-        <div class="ramo" id="practicas-I" data-requiere="ts-comunidad">Prácticas TS I</div>
-        <div class="ramo" id="seguridad-social" data-requiere="estado-politica-social">Seguridad Social</div>
-        <div class="ramo" id="electiva-II" data-requiere="none">Electiva II</div>
+        <div class="ramo" id="practica1" data-requiere="ts_comunidad, admin">Prácticas TS I</div>
+        <div class="ramo" id="seguridad_social" data-requiere="estado">Seguridad Social</div>
+        <div class="ramo" id="electiva2" data-requiere="ninguno">Electiva II</div>
       </div>
+
+      <h3>VIII Semestre</h3>
       <div class="semestre">
-        <h3>VIII Semestre</h3>
-        <div class="ramo" id="computacion-sociales" data-requiere="investigacion-social-III">Computación Aplicada</div>
-        <div class="ramo" id="practicas-II" data-requiere="practicas-I">Prácticas TS II</div>
-        <div class="ramo" id="orientacion-familiar" data-requiere="ts-familia">Orientación Familiar</div>
+        <div class="ramo" id="computacion" data-requiere="investigacion3">Computación Aplicada</div>
+        <div class="ramo" id="practica2" data-requiere="practica1">Prácticas TS II</div>
+        <div class="ramo" id="orientacion_familiar" data-requiere="individuo_familia">Orientación Familiar</div>
       </div>
     </section>
 
     <!-- Quinto Año -->
     <section>
       <h2>Quinto Año</h2>
+
+      <h3>IX Semestre</h3>
       <div class="semestre">
-        <h3>IX Semestre</h3>
-        <div class="ramo" id="practicas-III" data-requiere="practicas-II,orientacion-familiar">Prácticas TS III</div>
+        <div class="ramo" id="practica3" data-requiere="practica2, orientacion_familiar">Prácticas TS III</div>
       </div>
+
+      <h3>X Semestre</h3>
       <div class="semestre">
-        <h3>X Semestre</h3>
-        <div class="ramo" id="trabajo-grado" data-requiere="investigacion-social-III">Trabajo de Grado</div>
-        <div class="ramo" id="seminario-comunitario" data-requiere="ts-comunidad">Seminario Servicio Comunitario</div>
+        <div class="ramo" id="trabajo_grado" data-requiere="practica3">Trabajo de Grado</div>
+        <div class="ramo" id="seminario" data-requiere="practica3">Seminario Servicio Comunitario</div>
       </div>
     </section>
+
   </main>
+
+  <footer>
+    <p>Desarrollado por [Tu Nombre] – Malla de Trabajo Social</p>
+  </footer>
+
   <script src="script.js"></script>
 </body>
 </html>
+elGabriela
