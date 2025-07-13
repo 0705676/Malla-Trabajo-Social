@@ -1,39 +1,64 @@
 document.addEventListener("DOMContentLoaded", () => {
   const ramos = document.querySelectorAll('.ramo');
 
-  // 1. Al iniciar, los que tienen prerequisitos se deshabilitan
-  ramos.forEach(r => {
-    const req = r.dataset.requiere;
-    if (req && req !== "none" && req !== "ninguno") {
-      r.classList.add('disabled');
+  // Recuperar ramos aprobados desde localStorage
+  const aprobadosGuardados = JSON.parse(localStorage.getItem('ramosAprobados')) || [];
+
+  // Marcar como aprobados los guardados
+  aprobadosGuardados.forEach(id => {
+    const ramo = document.getElementById(id);
+    if (ramo) {
+      ramo.classList.add('aprobado');
     }
   });
 
-  // 2. Cuando apruebas un ramo
+  // Verificar qué ramos deben desbloquearse en base a los aprobados
+  function actualizarDesbloqueados() {
+    ramos.forEach(ramo => {
+      const requisitos = ramo.dataset.requiere;
+      if (!requisitos || requisitos === "none" || requisitos === "ninguno") {
+        if (!ramo.classList.contains('aprobado')) {
+          ramo.classList.remove('disabled');
+        }
+        return;
+      }
+
+      const ids = requisitos.split(',').map(r => r.trim());
+      const todosAprobados = ids.every(id => {
+        const req = document.getElementById(id);
+        return req && req.classList.contains('aprobado');
+      });
+
+      if (todosAprobados && !ramo.classList.contains('aprobado')) {
+        ramo.classList.remove('disabled');
+      }
+    });
+  }
+
+  // Aplicar desbloqueos en base al estado guardado
+  actualizarDesbloqueados();
+
+  // Clic en un ramo para aprobarlo
   ramos.forEach(ramo => {
     ramo.addEventListener('click', () => {
       if (ramo.classList.contains('disabled') || ramo.classList.contains('aprobado')) return;
 
-      // Marcar como aprobado (rojo)
       ramo.classList.add('aprobado');
 
-      const aprobadoId = ramo.id;
+      // Guardar en localStorage
+      const id = ramo.id;
+      if (!aprobadosGuardados.includes(id)) {
+        aprobadosGuardados.push(id);
+        localStorage.setItem('ramosAprobados', JSON.stringify(aprobadosGuardados));
+      }
 
-      // Revisar qué ramos desbloquear
-      ramos.forEach(dep => {
-        const reqs = dep.dataset.requiere;
-        if (!reqs || reqs === "none" || reqs === "ninguno") return;
-
-        const list = reqs.split(',').map(x => x.trim());
-        const todos = list.every(id => {
-          const prereq = document.getElementById(id);
-          return prereq && prereq.classList.contains('aprobado');
-        });
-
-        if (todos) {
-          dep.classList.remove('disabled'); // pasa a blanco
-        }
-      });
+      // Desbloquear siguientes ramos si corresponde
+      actualizarDesbloqueados();
     });
   });
 });
+// Función para reiniciar
+function reiniciarMalla() {
+  localStorage.removeItem('ramosAprobados');
+  location.reload();
+}
