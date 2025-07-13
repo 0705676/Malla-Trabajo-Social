@@ -1,80 +1,58 @@
 body {
-  font-family: 'Segoe UI', sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   margin: 0;
   padding: 20px;
-  background: #f9f9f9;
 }
 
 h1 {
   text-align: center;
-  margin-bottom: 30px;
+  color: #333;
+}
+
+.malla {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 10px;
+  padding: 20px;
+  overflow-x: auto;
 }
 
 .semestre {
-  margin-bottom: 40px;
+  background: #ddd;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 2px 2px 6px #aaa;
 }
 
 .semestre h2 {
-  margin-bottom: 10px;
-  background: #3f51b5;
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.materias {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
+  text-align: center;
+  margin-top: 0;
+  font-size: 16px;
 }
 
 .materia {
+  background-color: gray;
+  color: white;
+  padding: 8px;
+  margin: 6px 0;
   border-radius: 8px;
-  background: white;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  border: 2px solid #ccc;
-  transition: transform 0.2s;
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.materia.desbloqueada {
+  background-color: white;
+  color: black;
+  border: 1px solid #aaa;
+}
+
+.materia.aprobada {
+  background-color: #e74c3c;
+  color: white;
 }
 
 .materia:hover {
-  transform: scale(1.01);
-}
-
-.aprobada {
-  background: #ffdddd;
-  border-color: red;
-}
-
-.bloqueada {
-  background: #e0e0e0;
-  color: #777;
-  pointer-events: none;
-  opacity: 0.6;
-}
-
-input[type="checkbox"] {
-  transform: scale(1.2);
-}
-
-.acciones {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-button {
-  background: #e53935;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background: #c62828;
+  transform: scale(1.02);
 }
