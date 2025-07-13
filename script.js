@@ -1,27 +1,30 @@
 document.addEventListener("DOMContentLoaded", function () {
   const ramos = document.querySelectorAll(".ramo");
 
-  ramos.forEach(boton => {
-    // Inicializa estado
-    if (!boton.classList.contains("bloqueado")) {
-      boton.classList.add("desbloqueado");
+  ramos.forEach(ramo => {
+    // Inicializar estilos
+    if (!ramo.classList.contains("bloqueado")) {
+      ramo.classList.add("desbloqueado");
     }
 
-    boton.addEventListener("click", function () {
-      // Solo permite clic si está desbloqueado
-      if (boton.classList.contains("bloqueado") || boton.classList.contains("aprobado")) return;
+    ramo.addEventListener("click", function () {
+      if (ramo.classList.contains("bloqueado") || ramo.classList.contains("aprobado")) {
+        return;
+      }
 
-      boton.classList.remove("desbloqueado");
-      boton.classList.add("aprobado");
+      // Marcar como aprobado
+      ramo.classList.remove("desbloqueado");
+      ramo.classList.add("aprobado");
 
-      const desbloquea = boton.getAttribute("data-desbloquea");
+      // Desbloquear los ramos dependientes
+      const desbloquea = ramo.getAttribute("data-desbloquea");
       if (desbloquea) {
-        const ramosADesbloquear = desbloquea.split(",");
-        ramosADesbloquear.forEach(nombre => {
-          const ramoDestino = document.querySelector(`.ramo[data-nombre="${nombre.trim()}"]`);
-          if (ramoDestino && ramoDestino.classList.contains("bloqueado")) {
-            ramoDestino.classList.remove("bloqueado");
-            ramoDestino.classList.add("desbloqueado");
+        const ramosDesbloqueados = desbloquea.split(",");
+        ramosDesbloqueados.forEach(nombre => {
+          const siguiente = document.querySelector(`.ramo[data-nombre="${nombre.trim()}"]`);
+          if (siguiente && siguiente.classList.contains("bloqueado")) {
+            siguiente.classList.remove("bloqueado");
+            siguiente.classList.add("desbloqueado");
           }
         });
       }
