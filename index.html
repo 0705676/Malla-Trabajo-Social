@@ -1,133 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Malla Interactiva - Trabajo Social</title>
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="estilos.css"/>
 </head>
 <body>
-
-  <header>
-    <h1>Malla Interactiva - Trabajo Social</h1>
-    <button onclick="reiniciarMalla()">🔁 Reiniciar malla</button>
-  </header>
-
-  <main>
-
-    <!-- Primer Año -->
-    <section>
-      <h2>Primer Año</h2>
-
-      <h3>I Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="matematicas" data-requiere="ninguno">Matemáticas</div>
-        <div class="ramo" id="bases_sociologicas" data-requiere="ninguno">Bases Sociológicas</div>
-        <div class="ramo" id="fundamentos_ts" data-requiere="ninguno">Fundamentos de TS</div>
-        <div class="ramo" id="expresion" data-requiere="ninguno">Expresión Oral y Escrita</div>
-        <div class="ramo" id="autodesarrollo" data-requiere="ninguno">Autodesarrollo</div>
-      </div>
-
-      <h3>II Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="estadistica1" data-requiere="matematicas">Estadística I</div>
-        <div class="ramo" id="epistemologia" data-requiere="ninguno">Epistemología</div>
-        <div class="ramo" id="ts_disciplina" data-requiere="fundamentos_ts">TS como Disciplina y Profesión</div>
-        <div class="ramo" id="antropologia" data-requiere="bases_sociologicas">Antropología Social</div>
-        <div class="ramo" id="psicologia_general" data-requiere="ninguno">Psicología General</div>
-        <div class="ramo" id="informatica" data-requiere="ninguno">Informática Básica</div>
-      </div>
-    </section>
-
-    <!-- Segundo Año -->
-    <section>
-      <h2>Segundo Año</h2>
-
-      <h3>III Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="estadistica2" data-requiere="estadistica1">Estadística II</div>
-        <div class="ramo" id="investigacion1" data-requiere="epistemologia">Investigación Social I</div>
-        <div class="ramo" id="metodos" data-requiere="ts_disciplina">Métodos de Intervención</div>
-        <div class="ramo" id="ecologia" data-requiere="ninguno">Ecología Humana</div>
-        <div class="ramo" id="psicologia_social" data-requiere="psicologia_general">Psicología Social</div>
-        <div class="ramo" id="teoria" data-requiere="ninguno">Teoría Socio-política</div>
-      </div>
-
-      <h3>IV Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="comunicacion" data-requiere="ninguno">Comunicación</div>
-        <div class="ramo" id="estudios_poblacion" data-requiere="estadistica1">Estudios de Población</div>
-        <div class="ramo" id="ts_grupo" data-requiere="metodos">TS con Grupo</div>
-        <div class="ramo" id="tecnicas_grupales" data-requiere="ninguno">Técnicas Grupales</div>
-        <div class="ramo" id="economia" data-requiere="ninguno">Economía Política</div>
-        <div class="ramo" id="historia" data-requiere="ninguno">Historia Contemporánea</div>
-      </div>
-    </section>
-
-    <!-- Tercer Año -->
-    <section>
-      <h2>Tercer Año</h2>
-
-      <h3>V Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="investigacion2" data-requiere="estadistica2, investigacion1">Investigación Social II</div>
-        <div class="ramo" id="legislacion" data-requiere="ninguno">Legislación Social</div>
-        <div class="ramo" id="ts_comunidad" data-requiere="ts_grupo">TS en el Ámbito Comunitario</div>
-        <div class="ramo" id="planificacion" data-requiere="metodos">Planificación Social</div>
-        <div class="ramo" id="estado" data-requiere="economia">Estado y Política Social</div>
-        <div class="ramo" id="ingles" data-requiere="ninguno">Inglés</div>
-      </div>
-
-      <h3>VI Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="investigacion3" data-requiere="investigacion2">Investigación Social III</div>
-        <div class="ramo" id="admin" data-requiere="estado">Administración y Gerencia Social</div>
-        <div class="ramo" id="individuo_familia" data-requiere="ninguno">TS con Individuo y Familia</div>
-        <div class="ramo" id="formulacion" data-requiere="planificacion">Formulación y Evaluación de Proyectos</div>
-        <div class="ramo" id="indicadores" data-requiere="planificacion, estudios_poblacion">Indicadores Sociales</div>
-        <div class="ramo" id="electiva1" data-requiere="ninguno">Electiva I</div>
-      </div>
-    </section>
-
-    <!-- Cuarto Año -->
-    <section>
-      <h2>Cuarto Año</h2>
-
-      <h3>VII Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="practica1" data-requiere="ts_comunidad, admin">Prácticas TS I</div>
-        <div class="ramo" id="seguridad_social" data-requiere="estado">Seguridad Social</div>
-        <div class="ramo" id="electiva2" data-requiere="ninguno">Electiva II</div>
-      </div>
-
-      <h3>VIII Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="computacion" data-requiere="investigacion3">Computación Aplicada</div>
-        <div class="ramo" id="practica2" data-requiere="practica1">Prácticas TS II</div>
-        <div class="ramo" id="orientacion_familiar" data-requiere="individuo_familia">Orientación Familiar</div>
-      </div>
-    </section>
-
-    <!-- Quinto Año -->
-    <section>
-      <h2>Quinto Año</h2>
-
-      <h3>IX Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="practica3" data-requiere="practica2, orientacion_familiar">Prácticas TS III</div>
-      </div>
-
-      <h3>X Semestre</h3>
-      <div class="semestre">
-        <div class="ramo" id="trabajo_grado" data-requiere="practica3">Trabajo de Grado</div>
-        <div class="ramo" id="seminario" data-requiere="practica3">Seminario Servicio Comunitario</div>
-      </div>
-    </section>
-
-  </main>
+  <h1>Malla Interactiva - Trabajo Social</h1>
+  <div id="malla-container"></div>
 
   <footer>
-    <p>Desarrollado por [Gabriela Brito] – Malla de Trabajo Social</p>
+    Desarrollado por Gabriela Brito
   </footer>
 
   <script src="script.js"></script>
