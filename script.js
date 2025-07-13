@@ -1,16 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
   const ramos = document.querySelectorAll(".ramo");
 
-  // Cargar lista de ramos aprobados desde localStorage
-  const ramosAprobados = JSON.parse(localStorage.getItem("ramosAprobados") || "[]");
+  // Recuperar desde localStorage
+  let ramosAprobados = JSON.parse(localStorage.getItem("ramosAprobados")) || [];
 
-  // Función para desbloquear dependientes
-  function desbloquearDependientes(nombreRamo) {
-    const ramoActual = document.querySelector(`.ramo[data-nombre="${nombreRamo}"]`);
-    const desbloquea = ramoActual?.getAttribute("data-desbloquea");
+  // Desbloquear los ramos que dependen de uno aprobado
+  function desbloquearRamosDependientes(nombreRamo) {
+    const boton = document.querySelector(`.ramo[data-nombre="${nombreRamo}"]`);
+    const desbloquea = boton?.getAttribute("data-desbloquea");
     if (desbloquea) {
-      desbloquea.split(",").forEach(nombre => {
-        const ramoDestino = document.querySelector(`.ramo[data-nombre="${nombre.trim()}"]`);
+      desbloquea.split(",").forEach(destino => {
+        const ramoDestino = document.querySelector(`.ramo[data-nombre="${destino.trim()}"]`);
         if (ramoDestino && ramoDestino.classList.contains("bloqueado")) {
           ramoDestino.classList.remove("bloqueado");
           ramoDestino.classList.add("desbloqueado");
@@ -19,40 +19,38 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // Inicializar botones según estado guardado
-  ramos.forEach(ramo => {
-    const nombre = ramo.getAttribute("data-nombre");
-
-    if (ramosAprobados.includes(nombre)) {
-      ramo.classList.remove("bloqueado", "desbloqueado");
-      ramo.classList.add("aprobado");
-    } else if (!ramo.classList.contains("bloqueado")) {
-      ramo.classList.add("desbloqueado");
+  // Marcar los aprobados y desbloquear sus dependientes
+  ramosAprobados.forEach(nombre => {
+    const boton = document.querySelector(`.ramo[data-nombre="${nombre}"]`);
+    if (boton) {
+      boton.classList.remove("bloqueado", "desbloqueado");
+      boton.classList.add("aprobado");
+      desbloquearRamosDependientes(nombre);
     }
   });
 
-  // Segundo paso: desbloquear los dependientes de lo ya aprobado
-  ramosAprobados.forEach(nombre => {
-    desbloquearDependientes(nombre);
-  });
+  // Inicializar los que no están aprobados
+  ramos.forEach(boton => {
+    const nombre = boton.getAttribute("data-nombre");
+    if (!ramosAprobados.includes(nombre)) {
+      if (!boton.classList.contains("bloqueado")) {
+        boton.classList.add("desbloqueado");
+      }
+    }
 
-  // Escuchar clics
-  ramos.forEach(ramo => {
-    ramo.addEventListener("click", function () {
-      const nombre = ramo.getAttribute("data-nombre");
+    // Evento click
+    boton.addEventListener("click", function () {
+      if (boton.classList.contains("bloqueado") || boton.classList.contains("aprobado")) return;
 
-      if (ramo.classList.contains("bloqueado") || ramo.classList.contains("aprobado")) return;
+      boton.classList.remove("desbloqueado");
+      boton.classList.add("aprobado");
 
-      ramo.classList.remove("desbloqueado");
-      ramo.classList.add("aprobado");
-
-      // Guardar en localStorage
       if (!ramosAprobados.includes(nombre)) {
         ramosAprobados.push(nombre);
         localStorage.setItem("ramosAprobados", JSON.stringify(ramosAprobados));
       }
 
-      desbloquearDependientes(nombre);
+      desbloquearRamosDependientes(nombre);
     });
   });
 });
