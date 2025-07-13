@@ -1,28 +1,75 @@
-// Obtener todos los elementos con clase "ramo"
-const ramos = document.querySelectorAll('.ramo');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-// Función para manejar el clic en un ramo
-ramos.forEach(ramo => {
-    ramo.addEventListener('click', function() {
-        if (ramo.classList.contains('aprobado')) {
-            return; // Si el ramo ya está aprobado, no hacer nada
-        }
-        
-        // Marcar el ramo como aprobado
-        ramo.classList.add('aprobado');
-        
-        // Obtener los ramos que dependen de este ramo
-        desbloquearRamos(ramo.id);
-    });
-});
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f0f0; /* Fondo gris claro */
+  color: #333;
+  padding: 20px;
+}
 
-// Función para desbloquear los ramos que dependen de otro
-function desbloquearRamos(ramoId) {
-    const ramosDependientes = document.querySelectorAll(`[data-requiere="${ramoId}"]`);
-    
-    ramosDependientes.forEach(ramo => {
-        // Desbloquear el ramo
-        ramo.classList.remove('disabled');
-        ramo.classList.add('desbloqueado');
-    });
+header {
+  background-color: #b71c1c; /* Rojo oscuro */
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  margin: 20px 0 10px;
+  color: #b71c1c;
+}
+
+h3 {
+  margin: 10px 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+.semestre {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin: 15px 0;
+}
+
+.ramo {
+  background-color: #e0e0e0; /* Gris claro */
+  color: #333;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.3s ease;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+}
+
+.ramo:hover {
+  background-color: #cfcfcf;
+}
+
+.ramo.aprobado {
+  background-color: #d32f2f; /* Rojo */
+  color: white;
+  cursor: default;
+}
+
+.ramo.disabled {
+  opacity: 0.5;
+  pointer-events: none;
 }
