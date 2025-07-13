@@ -65,13 +65,14 @@ const materias = {
   }
 };
 
-// 1. Obtener materias que están bloqueadas por defecto
+// 🔎 Detectar qué materias están bloqueadas hasta que otra las desbloquee
 function materiasBloqueadas() {
   const bloqueadas = new Set();
+
   for (let semestre in materias) {
     for (let materia in materias[semestre]) {
-      for (let dependiente of materias[semestre][materia]) {
-        bloqueadas.add(dependiente);
+      for (let desbloquea of materias[semestre][materia]) {
+        bloqueadas.add(desbloquea);
       }
     }
   }
@@ -91,6 +92,7 @@ function cargarEstado(nombre) {
 }
 
 function puedeSerActivada(materia) {
+  // Si no está bloqueada, se puede activar directamente
   if (!bloqueadas.has(materia)) return true;
 
   for (let semestre in materias) {
@@ -123,16 +125,7 @@ function crearMalla() {
       checkbox.type = 'checkbox';
       checkbox.id = materia;
       checkbox.checked = cargarEstado(materia);
-
-      const desbloqueada = puedeSerActivada(materia);
-
-      if (!desbloqueada) {
-        card.classList.add("bloqueada");
-        checkbox.disabled = true;
-      } else if (checkbox.checked) {
-        card.classList.add("aprobada");
-      }
-
+      checkbox.disabled = !checkbox.checked && !puedeSerActivada(materia);
       checkbox.addEventListener('change', () => {
         guardarEstado(materia, checkbox.checked);
         actualizarDisponibilidad();
@@ -157,17 +150,8 @@ function crearMalla() {
 function actualizarDisponibilidad() {
   for (let nombre in checkboxes) {
     const { element, checkbox } = checkboxes[nombre];
-    const desbloqueada = puedeSerActivada(nombre);
-
-    checkbox.disabled = !checkbox.checked && !desbloqueada;
-
-    element.classList.remove("bloqueada", "aprobada");
-
-    if (!desbloqueada && !checkbox.checked) {
-      element.classList.add("bloqueada");
-    } else if (checkbox.checked) {
-      element.classList.add("aprobada");
-    }
+    checkbox.disabled = !checkbox.checked && !puedeSerActivada(nombre);
+    element.classList.toggle("disabled", checkbox.disabled && !checkbox.checked);
   }
 }
 
