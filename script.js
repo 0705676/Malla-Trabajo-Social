@@ -7,7 +7,7 @@ const materias = {
     "Autodesarrollo": []
   },
   "II semestre": {
-    "Estadística I": ["Estadística II", "Estudios de Población"],
+    "Estadística I": ["Estadística II","Estudios de Población"],
     "Epistemología de las ciencias sociales": ["Investigación Social I"],
     "Trabajo Social como disciplina y profesión": ["Métodos de Intervención Profesional en el Trabajo Social"],
     "Antropología Social": [],
@@ -17,7 +17,7 @@ const materias = {
   "III semestre": {
     "Estadística II": ["Investigación Social II"],
     "Investigación Social I": ["Investigación Social II"],
-    "Métodos de Intervención Profesional en el Trabajo Social": ["Trabajo Social con Grupo", "Planificación Social"],
+    "Métodos de Intervención Profesional en el Trabajo Social": ["Trabajo Social con Grupo","Planificación Social"],
     "Ecología Humana": [],
     "Psicología Social": [],
     "Teoría Socio-política": []
@@ -34,8 +34,8 @@ const materias = {
     "Investigación Social II": ["Investigación Social III"],
     "Legislación Social": [],
     "Trabajo Social en el ámbito comunitario": ["Prácticas de Trabajo Social I"],
-    "Planificación Social": ["Formulación y Evaluación de Proyectos Sociales", "Indicadores Sociales"],
-    "Estado y Política Social": ["Administración y Gerencia Social", "Seguridad Social"],
+    "Planificación Social": ["Formulación y Evaluación de Proyectos Sociales","Indicadores Sociales"],
+    "Estado y Política Social": ["Administración y Gerencia Social","Seguridad Social"],
     "Inglés": []
   },
   "VI semestre": {
@@ -65,94 +65,87 @@ const materias = {
   }
 };
 
-// 🔎 Detectar qué materias están bloqueadas hasta que otra las desbloquee
-function materiasBloqueadas() {
-  const bloqueadas = new Set();
-
-  for (let semestre in materias) {
-    for (let materia in materias[semestre]) {
-      for (let desbloquea of materias[semestre][materia]) {
-        bloqueadas.add(desbloquea);
-      }
+const bloqueadasPorDefecto = (() => {
+  const set = new Set();
+  for (let sem in materias) {
+    for (let m in materias[sem]) {
+      materias[sem][m].forEach(dep => set.add(dep));
     }
   }
-  return bloqueadas;
+  return set;
+})();
+
+const estado = {};
+const cajas = {};
+
+function guardar(name, val) {
+  localStorage.setItem(name, val);
 }
 
-const bloqueadas = materiasBloqueadas();
-const mallaDiv = document.getElementById('malla');
-const checkboxes = {};
-
-function guardarEstado(nombre, estado) {
-  localStorage.setItem(nombre, estado);
+function leer(name) {
+  return localStorage.getItem(name) === 'true';
 }
 
-function cargarEstado(nombre) {
-  return localStorage.getItem(nombre) === 'true';
-}
-
-function puedeSerActivada(materia) {
-  // Si no está bloqueada, se puede activar directamente
-  if (!bloqueadas.has(materia)) return true;
-
-  for (let semestre in materias) {
-    for (let origen in materias[semestre]) {
-      if (materias[semestre][origen].includes(materia)) {
-        if (!cargarEstado(origen)) return false;
-      }
-    }
-  }
+function sePuede(materia) {
+  if (!bloqueadasPorDefecto.has(materia)) return true;
+  for (let s in materias)
+    for (let o in materias[s])
+      if (materias[s][o].includes(materia) && !estado[o]) return false;
   return true;
 }
 
-function crearMalla() {
-  for (let semestre in materias) {
-    const contenedor = document.createElement('div');
-    contenedor.className = 'semestre';
+function crear() {
+  const root = document.getElementById('malla');
+  for (let sem in materias) {
+    const divS = document.createElement('div');
+    divS.className = 'semestre';
+    const t = document.createElement('h2'); t.textContent = sem;
+    divS.appendChild(t);
 
-    const titulo = document.createElement('h2');
-    titulo.textContent = semestre;
-    contenedor.appendChild(titulo);
+    const gm = document.createElement('div');
+    gm.className = 'materias';
 
-    const grid = document.createElement('div');
-    grid.className = 'materias';
-
-    for (let materia in materias[semestre]) {
+    Object.keys(materias[sem]).forEach(mat => {
       const card = document.createElement('div');
       card.className = 'materia';
 
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.id = materia;
-      checkbox.checked = cargarEstado(materia);
-      checkbox.disabled = !checkbox.checked && !puedeSerActivada(materia);
-      checkbox.addEventListener('change', () => {
-        guardarEstado(materia, checkbox.checked);
-        actualizarDisponibilidad();
+      const chk = document.createElement('input');
+      chk.type = 'checkbox';
+      chk.checked = leer(mat);
+      estado[mat] = chk.checked;
+
+      const possible = sePuede(mat);
+      if (!possible && !chk.checked) card.classList.add('bloqueada');
+      if (chk.checked) card.classList.add('aprobada');
+
+      chk.disabled = !possible && !chk.checked;
+      chk.addEventListener('change', () => {
+        estado[mat] = chk.checked;
+        guardar(mat, chk.checked);
+        actualizar();
       });
 
-      const label = document.createElement('label');
-      label.setAttribute('for', materia);
-      label.textContent = materia;
+      const lbl = document.createElement('label');
+      lbl.htmlFor = mat;
+      lbl.textContent = mat;
 
-      card.appendChild(checkbox);
-      card.appendChild(label);
+      card.append(chk, lbl);
+      gm.appendChild(card);
+      cajas[mat] = { card, chk };
+    });
 
-      grid.appendChild(card);
-      checkboxes[materia] = { element: card, checkbox };
-    }
-
-    contenedor.appendChild(grid);
-    mallaDiv.appendChild(contenedor);
+    divS.appendChild(gm);
+    root.appendChild(divS);
   }
 }
 
-function actualizarDisponibilidad() {
-  for (let nombre in checkboxes) {
-    const { element, checkbox } = checkboxes[nombre];
-    checkbox.disabled = !checkbox.checked && !puedeSerActivada(nombre);
-    element.classList.toggle("disabled", checkbox.disabled && !checkbox.checked);
-  }
+function actualizar() {
+  Object.entries(cajas).forEach(([mat, {card, chk}]) => {
+    const can = sePuede(mat);
+    card.classList.toggle('bloqueada', !can && !chk.checked);
+    card.classList.toggle('aprobada', chk.checked);
+    chk.disabled = !can && !chk.checked;
+  });
 }
 
 function resetearMalla() {
@@ -160,5 +153,5 @@ function resetearMalla() {
   location.reload();
 }
 
-crearMalla();
-actualizarDisponibilidad();
+crear();
+actualizar();
