@@ -1,109 +1,149 @@
-const materias = [
-  // Primer año
-  { id: "matematicas", nombre: "Matemáticas", semestre: 1, desbloquea: ["estadistica1"] },
-  { id: "bases", nombre: "Bases Sociológicas para el Trabajo Social", semestre: 1, desbloquea: ["antropologia"] },
-  { id: "fundamentos", nombre: "Fundamentos del trabajo social", semestre: 1, desbloquea: ["disciplina"] },
-  { id: "expresion", nombre: "Expresión Oral y escrita", semestre: 1 },
-  { id: "autodesarrollo", nombre: "Autodesarrollo", semestre: 1 },
-
-  { id: "estadistica1", nombre: "Estadística I", semestre: 2, prerequisitos: ["matematicas"], desbloquea: ["estadistica2", "poblacion"] },
-  { id: "epistemologia", nombre: "Epistemología de las ciencias sociales", semestre: 2, desbloquea: ["investigacion1"] },
-  { id: "disciplina", nombre: "Trabajo social como disciplina y profesión", semestre: 2, prerequisitos: ["fundamentos"], desbloquea: ["metodos"] },
-  { id: "antropologia", nombre: "Antropología Social", semestre: 2, prerequisitos: ["bases"] },
-  { id: "psicologia", nombre: "Psicología General", semestre: 2, desbloquea: ["psicosocial"] },
-  { id: "informatica", nombre: "Informática Básica", semestre: 2 },
-
-  // Segundo año
-  { id: "estadistica2", nombre: "Estadística II", semestre: 3, prerequisitos: ["estadistica1"], desbloquea: ["investigacion2"] },
-  { id: "investigacion1", nombre: "Investigación Social I", semestre: 3, prerequisitos: ["epistemologia"], desbloquea: ["investigacion2"] },
-  { id: "metodos", nombre: "Métodos de Intervención Profesional", semestre: 3, prerequisitos: ["disciplina"], desbloquea: ["grupos", "planificacion"] },
-  { id: "ecologia", nombre: "Ecología Humana", semestre: 3 },
-  { id: "psicosocial", nombre: "Psicología Social", semestre: 3, prerequisitos: ["psicologia"] },
-  { id: "teoria", nombre: "Teoría Socio-política", semestre: 3 },
-
-  { id: "comunicacion", nombre: "Comunicación", semestre: 4 },
-  { id: "poblacion", nombre: "Estudios de Población", semestre: 4, prerequisitos: ["estadistica1"], desbloquea: ["indicadores"] },
-  { id: "grupos", nombre: "Trabajo Social con Grupo", semestre: 4, prerequisitos: ["metodos"], desbloquea: ["comunitario"] },
-  { id: "tecnicas", nombre: "Técnicas Grupales", semestre: 4 },
-  { id: "economia", nombre: "Economía Política", semestre: 4, desbloquea: ["estado"] },
-  { id: "historia", nombre: "Historia Contemporánea de Venezuela", semestre: 4 },
-
-  // Tercer año
-  { id: "investigacion2", nombre: "Investigación Social II", semestre: 5, prerequisitos: ["estadistica2", "investigacion1"], desbloquea: ["investigacion3"] },
-  { id: "legislacion", nombre: "Legislación Social", semestre: 5 },
-  { id: "comunitario", nombre: "Trabajo Social en el ámbito comunitario", semestre: 5, prerequisitos: ["grupos"], desbloquea: ["practica1"] },
-  { id: "planificacion", nombre: "Planificación Social", semestre: 5, prerequisitos: ["metodos"], desbloquea: ["proyectos", "indicadores"] },
-  { id: "estado", nombre: "Estado y Política Social", semestre: 5, prerequisitos: ["economia"], desbloquea: ["gerencia", "seguridad"] },
-  { id: "ingles", nombre: "Inglés", semestre: 5 },
-
-  { id: "investigacion3", nombre: "Investigación Social III", semestre: 6, prerequisitos: ["investigacion2"], desbloquea: ["computacion"] },
-  { id: "gerencia", nombre: "Administración y Gerencia Social", semestre: 6, prerequisitos: ["estado"], desbloquea: ["practica1"] },
-  { id: "familia", nombre: "Trabajo Social con Individuo y Familia", semestre: 6, desbloquea: ["orientacion"] },
-  { id: "proyectos", nombre: "Formulación y Evaluación de Proyectos Sociales", semestre: 6 },
-  { id: "indicadores", nombre: "Indicadores Sociales", semestre: 6 },
-  { id: "electiva1", nombre: "Electiva I", semestre: 6 },
-
-  // Cuarto año
-  { id: "practica1", nombre: "Prácticas de Trabajo Social I", semestre: 7, prerequisitos: ["comunitario", "gerencia"], desbloquea: ["practica2"] },
-  { id: "seguridad", nombre: "Seguridad Social", semestre: 7, prerequisitos: ["estado"] },
-  { id: "electiva2", nombre: "Electiva II", semestre: 7 },
-
-  { id: "computacion", nombre: "Computación Aplicada a las Ciencias Sociales", semestre: 8, prerequisitos: ["investigacion3"] },
-  { id: "practica2", nombre: "Prácticas de Trabajo Social II", semestre: 8, prerequisitos: ["practica1"], desbloquea: ["practica3"] },
-  { id: "orientacion", nombre: "Orientación Familiar", semestre: 8, prerequisitos: ["familia"], desbloquea: ["practica3"] },
-
-  // Quinto año
-  { id: "practica3", nombre: "Prácticas de Trabajo Social III", semestre: 9, prerequisitos: ["practica2", "orientacion"] },
-
-  { id: "grado", nombre: "Trabajo de Grado", semestre: 10 },
-  { id: "seminario", nombre: "Seminario Servicio Comunitario", semestre: 10 },
+const materiasPorSemestre = [
+  {
+    semestre: "I semestre",
+    materias: [
+      { nombre: "Matemáticas", abre: ["Estadística I"] },
+      { nombre: "Bases Sociológicas para el Trabajo Social", abre: ["Antropología Social"] },
+      { nombre: "Fundamentos del trabajo social", abre: ["Trabajo social como disciplina y profesión"] },
+      { nombre: "Expresión Oral y escrita" },
+      { nombre: "Autodesarrollo" }
+    ]
+  },
+  {
+    semestre: "II semestre",
+    materias: [
+      { nombre: "Estadística I", abre: ["Estadística II", "Estudios de Población"] },
+      { nombre: "Epistemología de las ciencias sociales", abre: ["Investigación Social I"] },
+      { nombre: "Trabajo social como disciplina y profesión", abre: ["Métodos de Intervención Profesional en el Trabajo Social"] },
+      { nombre: "Antropología Social" },
+      { nombre: "Psicología General", abre: ["Psicología Social"] },
+      { nombre: "Informática Básica" }
+    ]
+  },
+  {
+    semestre: "III semestre",
+    materias: [
+      { nombre: "Estadística II", abre: ["Investigación Social II"] },
+      { nombre: "Investigación Social I", abre: ["Investigación Social II"] },
+      { nombre: "Métodos de Intervención Profesional en el Trabajo Social", abre: ["Trabajo Social con Grupo", "Planificación Social"] },
+      { nombre: "Ecología Humana" },
+      { nombre: "Psicología Social" },
+      { nombre: "Teoría Socio-política" }
+    ]
+  },
+  {
+    semestre: "IV semestre",
+    materias: [
+      { nombre: "Comunicación" },
+      { nombre: "Estudios de Población", abre: ["Indicadores Sociales"] },
+      { nombre: "Trabajo Social con Grupo", abre: ["Trabajo Social en el ámbito comunitario"] },
+      { nombre: "Técnicas Grupales" },
+      { nombre: "Economía Política", abre: ["Estado y Política Social"] },
+      { nombre: "Historia Contemporánea de Venezuela" }
+    ]
+  },
+  {
+    semestre: "V semestre",
+    materias: [
+      { nombre: "Investigación Social II", abre: ["Investigación Social III"] },
+      { nombre: "Legislación Social" },
+      { nombre: "Trabajo Social en el ámbito comunitario", abre: ["Prácticas de Trabajo Social I"] },
+      { nombre: "Planificación Social", abre: ["Formulación y Evaluación de Proyectos Sociales", "Indicadores Sociales"] },
+      { nombre: "Estado y Política Social", abre: ["Administración y Gerencia Social", "Seguridad Social"] },
+      { nombre: "Inglés" }
+    ]
+  },
+  {
+    semestre: "VI semestre",
+    materias: [
+      { nombre: "Investigación Social III", abre: ["Computación Aplicada a las Ciencias Sociales"] },
+      { nombre: "Administración y Gerencia Social", abre: ["Prácticas de Trabajo Social I"] },
+      { nombre: "Trabajo Social con Individuo y Familia", abre: ["Orientación Familiar"] },
+      { nombre: "Formulación y Evaluación de Proyectos Sociales" },
+      { nombre: "Indicadores Sociales" },
+      { nombre: "Electiva I" }
+    ]
+  },
+  {
+    semestre: "VII semestre",
+    materias: [
+      { nombre: "Prácticas de Trabajo Social I", abre: ["Prácticas de Trabajo Social II"] },
+      { nombre: "Seguridad Social" },
+      { nombre: "Electiva II" }
+    ]
+  },
+  {
+    semestre: "VIII semestre",
+    materias: [
+      { nombre: "Computación Aplicada a las Ciencias Sociales" },
+      { nombre: "Prácticas de Trabajo Social II", abre: ["Prácticas de Trabajo Social III"] },
+      { nombre: "Orientación Familiar", abre: ["Prácticas de Trabajo Social III"] }
+    ]
+  },
+  {
+    semestre: "IX semestre",
+    materias: [
+      { nombre: "Prácticas de Trabajo Social III" }
+    ]
+  },
+  {
+    semestre: "X semestre",
+    materias: [
+      { nombre: "Trabajo de Grado" },
+      { nombre: "Seminario Servicio Comunitario" }
+    ]
+  }
 ];
 
-const container = document.getElementById("malla-container");
+const estadoMaterias = JSON.parse(localStorage.getItem("estadoMaterias")) || {};
 
-materias.forEach(m => {
-  const div = document.createElement("div");
-  div.classList.add("materia");
+function renderMalla() {
+  const malla = document.getElementById("malla");
+  malla.innerHTML = "";
 
-  const estado = m.prerequisitos ? "bloqueada" : "desbloqueada";
-  div.classList.add(estado);
-  div.innerText = m.nombre;
-  div.id = m.id;
+  materiasPorSemestre.forEach((semestre, index) => {
+    const columna = document.createElement("div");
+    columna.className = "semestre";
+    const titulo = document.createElement("h2");
+    titulo.textContent = semestre.semestre;
+    columna.appendChild(titulo);
 
-  div.addEventListener("click", () => toggleMateria(m));
-  container.appendChild(div);
-});
+    semestre.materias.forEach((materia) => {
+      const div = document.createElement("div");
+      div.textContent = materia.nombre;
+      div.className = "materia";
 
-function toggleMateria(materia) {
-  const div = document.getElementById(materia.id);
-  if (div.classList.contains("bloqueada")) return;
-  if (div.classList.contains("aprobada")) {
-    div.classList.remove("aprobada");
-    div.classList.add("desbloqueada");
-    bloquearDependientes(materia.id);
-  } else {
-    div.classList.remove("desbloqueada");
-    div.classList.add("aprobada");
-    desbloquear(materia.id);
-  }
-}
+      if (estadoMaterias[materia.nombre] === "aprobada") {
+        div.classList.add("aprobada");
+      } else if (
+        !materia.requiere ||
+        (materia.requiere || []).every(r => estadoMaterias[r] === "aprobada")
+      ) {
+        div.classList.add("desbloqueada");
+      }
 
-function desbloquear(id) {
-  materias.filter(m => m.prerequisitos?.includes(id)).forEach(m => {
-    const requisitos = m.prerequisitos.every(p => document.getElementById(p).classList.contains("aprobada"));
-    if (requisitos) {
-      const div = document.getElementById(m.id);
-      div.classList.remove("bloqueada");
-      div.classList.add("desbloqueada");
-    }
+      div.addEventListener("click", () => {
+        const estado = estadoMaterias[materia.nombre];
+        if (estado !== "aprobada" && div.classList.contains("desbloqueada")) {
+          estadoMaterias[materia.nombre] = "aprobada";
+          if (materia.abre) {
+            materia.abre.forEach(abierta => {
+              // Las materias desbloqueadas por esta, si no tienen requisitos adicionales, se desbloquean automáticamente
+              if (!estadoMaterias[abierta]) {
+                estadoMaterias[abierta] = "desbloqueada";
+              }
+            });
+          }
+          localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));
+          renderMalla();
+        }
+      });
+
+      columna.appendChild(div);
+    });
+
+    malla.appendChild(columna);
   });
 }
 
-function bloquearDependientes(id) {
-  materias.filter(m => m.prerequisitos?.includes(id)).forEach(m => {
-    const div = document.getElementById(m.id);
-    div.classList.remove("aprobada", "desbloqueada");
-    div.classList.add("bloqueada");
-    bloquearDependientes(m.id);
-  });
-}
+renderMalla();
