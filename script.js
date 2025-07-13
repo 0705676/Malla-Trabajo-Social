@@ -145,5 +145,4 @@ function renderMalla() {
     malla.appendChild(columna);
   });
 }
-
 renderMalla();
