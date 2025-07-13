@@ -1,180 +1,149 @@
-const materias = {
-  "I semestre": {
-    "Matemáticas": ["Estadística I"],
-    "Bases Sociológicas para el Trabajo Social": ["Antropología Social"],
-    "Fundamentos del trabajo social": ["Trabajo Social como disciplina y profesión"],
-    "Expresión Oral y escrita": [],
-    "Autodesarrollo": []
+const materiasPorSemestre = [
+  {
+    semestre: "I semestre",
+    materias: [
+      { nombre: "Matemáticas", abre: ["Estadística I"] },
+      { nombre: "Bases Sociológicas para el Trabajo Social", abre: ["Antropología Social"] },
+      { nombre: "Fundamentos del trabajo social", abre: ["Trabajo social como disciplina y profesión"] },
+      { nombre: "Expresión Oral y escrita" },
+      { nombre: "Autodesarrollo" }
+    ]
   },
-  "II semestre": {
-    "Estadística I": ["Estadística II", "Estudios de Población"],
-    "Epistemología de las ciencias sociales": ["Investigación Social I"],
-    "Trabajo Social como disciplina y profesión": ["Métodos de Intervención Profesional en el Trabajo Social"],
-    "Antropología Social": [],
-    "Psicología General": ["Psicología Social"],
-    "Informática Básica": []
+  {
+    semestre: "II semestre",
+    materias: [
+      { nombre: "Estadística I", abre: ["Estadística II", "Estudios de Población"] },
+      { nombre: "Epistemología de las ciencias sociales", abre: ["Investigación Social I"] },
+      { nombre: "Trabajo social como disciplina y profesión", abre: ["Métodos de Intervención Profesional en el Trabajo Social"] },
+      { nombre: "Antropología Social" },
+      { nombre: "Psicología General", abre: ["Psicología Social"] },
+      { nombre: "Informática Básica" }
+    ]
   },
-  "III semestre": {
-    "Estadística II": ["Investigación Social II"],
-    "Investigación Social I": ["Investigación Social II"],
-    "Métodos de Intervención Profesional en el Trabajo Social": ["Trabajo Social con Grupo", "Planificación Social"],
-    "Ecología Humana": [],
-    "Psicología Social": [],
-    "Teoría Socio-política": []
+  {
+    semestre: "III semestre",
+    materias: [
+      { nombre: "Estadística II", abre: ["Investigación Social II"] },
+      { nombre: "Investigación Social I", abre: ["Investigación Social II"] },
+      { nombre: "Métodos de Intervención Profesional en el Trabajo Social", abre: ["Trabajo Social con Grupo", "Planificación Social"] },
+      { nombre: "Ecología Humana" },
+      { nombre: "Psicología Social" },
+      { nombre: "Teoría Socio-política" }
+    ]
   },
-  "IV semestre": {
-    "Comunicación": [],
-    "Estudios de Población": ["Indicadores Sociales"],
-    "Trabajo Social con Grupo": ["Trabajo Social en el ámbito comunitario"],
-    "Técnicas Grupales": [],
-    "Economía Política": ["Estado y Política Social"],
-    "Historia Contemporánea de Venezuela": []
+  {
+    semestre: "IV semestre",
+    materias: [
+      { nombre: "Comunicación" },
+      { nombre: "Estudios de Población", abre: ["Indicadores Sociales"] },
+      { nombre: "Trabajo Social con Grupo", abre: ["Trabajo Social en el ámbito comunitario"] },
+      { nombre: "Técnicas Grupales" },
+      { nombre: "Economía Política", abre: ["Estado y Política Social"] },
+      { nombre: "Historia Contemporánea de Venezuela" }
+    ]
   },
-  "V semestre": {
-    "Investigación Social II": ["Investigación Social III"],
-    "Legislación Social": [],
-    "Trabajo Social en el ámbito comunitario": ["Prácticas de Trabajo Social I"],
-    "Planificación Social": ["Formulación y Evaluación de Proyectos Sociales", "Indicadores Sociales"],
-    "Estado y Política Social": ["Administración y Gerencia Social", "Seguridad Social"],
-    "Inglés": []
+  {
+    semestre: "V semestre",
+    materias: [
+      { nombre: "Investigación Social II", abre: ["Investigación Social III"] },
+      { nombre: "Legislación Social" },
+      { nombre: "Trabajo Social en el ámbito comunitario", abre: ["Prácticas de Trabajo Social I"] },
+      { nombre: "Planificación Social", abre: ["Formulación y Evaluación de Proyectos Sociales", "Indicadores Sociales"] },
+      { nombre: "Estado y Política Social", abre: ["Administración y Gerencia Social", "Seguridad Social"] },
+      { nombre: "Inglés" }
+    ]
   },
-  "VI semestre": {
-    "Investigación Social III": ["Computación Aplicada a las Ciencias Sociales"],
-    "Administración y Gerencia Social": ["Prácticas de Trabajo Social I"],
-    "Trabajo Social con Individuo y Familia": ["Orientación Familiar"],
-    "Formulación y Evaluación de Proyectos Sociales": [],
-    "Indicadores Sociales": [],
-    "Electiva I": []
+  {
+    semestre: "VI semestre",
+    materias: [
+      { nombre: "Investigación Social III", abre: ["Computación Aplicada a las Ciencias Sociales"] },
+      { nombre: "Administración y Gerencia Social", abre: ["Prácticas de Trabajo Social I"] },
+      { nombre: "Trabajo Social con Individuo y Familia", abre: ["Orientación Familiar"] },
+      { nombre: "Formulación y Evaluación de Proyectos Sociales" },
+      { nombre: "Indicadores Sociales" },
+      { nombre: "Electiva I" }
+    ]
   },
-  "VII semestre": {
-    "Prácticas de Trabajo Social I": ["Prácticas de Trabajo Social II"],
-    "Seguridad Social": [],
-    "Electiva II": []
+  {
+    semestre: "VII semestre",
+    materias: [
+      { nombre: "Prácticas de Trabajo Social I", abre: ["Prácticas de Trabajo Social II"] },
+      { nombre: "Seguridad Social" },
+      { nombre: "Electiva II" }
+    ]
   },
-  "VIII semestre": {
-    "Computación Aplicada a las Ciencias Sociales": [],
-    "Prácticas de Trabajo Social II": ["Prácticas de Trabajo Social III"],
-    "Orientación Familiar": ["Prácticas de Trabajo Social III"]
+  {
+    semestre: "VIII semestre",
+    materias: [
+      { nombre: "Computación Aplicada a las Ciencias Sociales" },
+      { nombre: "Prácticas de Trabajo Social II", abre: ["Prácticas de Trabajo Social III"] },
+      { nombre: "Orientación Familiar", abre: ["Prácticas de Trabajo Social III"] }
+    ]
   },
-  "IX semestre": {
-    "Prácticas de Trabajo Social III": []
+  {
+    semestre: "IX semestre",
+    materias: [
+      { nombre: "Prácticas de Trabajo Social III" }
+    ]
   },
-  "X semestre": {
-    "Trabajo de Grado": [],
-    "Seminario Servicio Comunitario": []
+  {
+    semestre: "X semestre",
+    materias: [
+      { nombre: "Trabajo de Grado" },
+      { nombre: "Seminario Servicio Comunitario" }
+    ]
   }
-};
+];
 
-// 1. Obtener materias que están bloqueadas por defecto
-function materiasBloqueadas() {
-  const bloqueadas = new Set();
-  for (let semestre in materias) {
-    for (let materia in materias[semestre]) {
-      for (let dependiente of materias[semestre][materia]) {
-        bloqueadas.add(dependiente);
-      }
-    }
-  }
-  return bloqueadas;
-}
+const estadoMaterias = JSON.parse(localStorage.getItem("estadoMaterias")) || {};
 
-const bloqueadas = materiasBloqueadas();
-const mallaDiv = document.getElementById('malla');
-const checkboxes = {};
+function renderMalla() {
+  const malla = document.getElementById("malla");
+  malla.innerHTML = "";
 
-function guardarEstado(nombre, estado) {
-  localStorage.setItem(nombre, estado);
-}
+  materiasPorSemestre.forEach((semestre, index) => {
+    const columna = document.createElement("div");
+    columna.className = "semestre";
+    const titulo = document.createElement("h2");
+    titulo.textContent = semestre.semestre;
+    columna.appendChild(titulo);
 
-function cargarEstado(nombre) {
-  return localStorage.getItem(nombre) === 'true';
-}
+    semestre.materias.forEach((materia) => {
+      const div = document.createElement("div");
+      div.textContent = materia.nombre;
+      div.className = "materia";
 
-function puedeSerActivada(materia) {
-  if (!bloqueadas.has(materia)) return true;
-
-  for (let semestre in materias) {
-    for (let origen in materias[semestre]) {
-      if (materias[semestre][origen].includes(materia)) {
-        if (!cargarEstado(origen)) return false;
-      }
-    }
-  }
-  return true;
-}
-
-function crearMalla() {
-  for (let semestre in materias) {
-    const contenedor = document.createElement('div');
-    contenedor.className = 'semestre';
-
-    const titulo = document.createElement('h2');
-    titulo.textContent = semestre;
-    contenedor.appendChild(titulo);
-
-    const grid = document.createElement('div');
-    grid.className = 'materias';
-
-    for (let materia in materias[semestre]) {
-      const card = document.createElement('div');
-      card.className = 'materia';
-
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.id = materia;
-      checkbox.checked = cargarEstado(materia);
-
-      const desbloqueada = puedeSerActivada(materia);
-
-      if (!desbloqueada) {
-        card.classList.add("bloqueada");
-        checkbox.disabled = true;
-      } else if (checkbox.checked) {
-        card.classList.add("aprobada");
+      if (estadoMaterias[materia.nombre] === "aprobada") {
+        div.classList.add("aprobada");
+      } else if (
+        !materia.requiere ||
+        (materia.requiere || []).every(r => estadoMaterias[r] === "aprobada")
+      ) {
+        div.classList.add("desbloqueada");
       }
 
-      checkbox.addEventListener('change', () => {
-        guardarEstado(materia, checkbox.checked);
-        actualizarDisponibilidad();
+      div.addEventListener("click", () => {
+        const estado = estadoMaterias[materia.nombre];
+        if (estado !== "aprobada" && div.classList.contains("desbloqueada")) {
+          estadoMaterias[materia.nombre] = "aprobada";
+          if (materia.abre) {
+            materia.abre.forEach(abierta => {
+              // Las materias desbloqueadas por esta, si no tienen requisitos adicionales, se desbloquean automáticamente
+              if (!estadoMaterias[abierta]) {
+                estadoMaterias[abierta] = "desbloqueada";
+              }
+            });
+          }
+          localStorage.setItem("estadoMaterias", JSON.stringify(estadoMaterias));
+          renderMalla();
+        }
       });
 
-      const label = document.createElement('label');
-      label.setAttribute('for', materia);
-      label.textContent = materia;
+      columna.appendChild(div);
+    });
 
-      card.appendChild(checkbox);
-      card.appendChild(label);
-
-      grid.appendChild(card);
-      checkboxes[materia] = { element: card, checkbox };
-    }
-
-    contenedor.appendChild(grid);
-    mallaDiv.appendChild(contenedor);
-  }
+    malla.appendChild(columna);
+  });
 }
 
-function actualizarDisponibilidad() {
-  for (let nombre in checkboxes) {
-    const { element, checkbox } = checkboxes[nombre];
-    const desbloqueada = puedeSerActivada(nombre);
-
-    checkbox.disabled = !checkbox.checked && !desbloqueada;
-
-    element.classList.remove("bloqueada", "aprobada");
-
-    if (!desbloqueada && !checkbox.checked) {
-      element.classList.add("bloqueada");
-    } else if (checkbox.checked) {
-      element.classList.add("aprobada");
-    }
-  }
-}
-
-function resetearMalla() {
-  localStorage.clear();
-  location.reload();
-}
-
-crearMalla();
-actualizarDisponibilidad();
+renderMalla();
