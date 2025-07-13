@@ -1,77 +1,80 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
+  margin: 0;
   padding: 20px;
-}
-
-header {
-  background-color: #b71c1c; /* Rojo oscuro */
-  color: white;
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 20px;
+  background: #f9f9f9;
 }
 
 h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  margin: 20px 0 10px;
-  color: #b71c1c;
-}
-
-h3 {
-  margin: 10px 0;
-  font-size: 1.1rem;
-  color: #333;
-}
-
-section {
-  margin-bottom: 40px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .semestre {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  margin: 15px 0;
+  margin-bottom: 40px;
 }
 
-.ramo {
-  background-color: #ffffff; /* Blanco por defecto (desbloqueada) */
-  color: #333;
-  padding: 20px;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 0.95rem;
-  font-weight: bold;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
-}
-
-.ramo:hover {
-  background-color: #f0f0f0;
-}
-
-.ramo.aprobado {
-  background-color: #c62828; /* Rojo fuerte */
+.semestre h2 {
+  margin-bottom: 10px;
+  background: #3f51b5;
   color: white;
-  cursor: default;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.ramo.disabled {
-  background-color: #cccccc; /* Gris claro para no vistas */
-  color: #888;
+.materias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.materia {
+  border-radius: 8px;
+  background: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #ccc;
+  transition: transform 0.2s;
+}
+
+.materia:hover {
+  transform: scale(1.01);
+}
+
+.aprobada {
+  background: #ffdddd;
+  border-color: red;
+}
+
+.bloqueada {
+  background: #e0e0e0;
+  color: #777;
   pointer-events: none;
   opacity: 0.6;
+}
+
+input[type="checkbox"] {
+  transform: scale(1.2);
+}
+
+.acciones {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+button {
+  background: #e53935;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #c62828;
 }
