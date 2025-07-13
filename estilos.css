@@ -1,1 +1,53 @@
-Index
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
+
+.tree-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.semester {
+    display: flex;
+    margin: 20px 0;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.ramo {
+    width: 200px;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    background-color: grey;
+    color: white;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.ramo.locked {
+    background-color: #b0b0b0;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.ramo.unlocked {
+    background-color: #c0392b; /* Rojo */
+}
+
+.ramo.completed {
+    background-color: #27ae60; /* Verde para indicar completado si se desea */
+}
+
