@@ -57,8 +57,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
-// Función para reiniciar
-function reiniciarMalla() {
-  localStorage.removeItem('ramosAprobados');
-  location.reload();
-}
